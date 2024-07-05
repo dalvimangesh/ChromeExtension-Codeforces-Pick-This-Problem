@@ -1,0 +1,22 @@
+{
+    "name" : "CFFileGenerator",
+    "description" : "File generator with proper name",
+    "version" : "0.0.1",
+
+    "manifest_version" : 3,
+
+    "action" : {
+        "default_popup" : "./popUp.html"
+    },
+
+    "content_scripts" : [
+
+        {
+            "matches" : ["*://codeforces.com/problemset/problem/*"],
+            "js" : ["contentScript.js"]
+        }
+
+    ],
+
+    "permissions" : ["scripting", "tabs"]
+}
