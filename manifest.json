@@ -1,6 +1,6 @@
 {
-    "name": "CFFileGenerator",
-    "description": "File generator with proper name",
+    "name": "Codeforces Pick this Problem",
+    "description": "codeforces Pick this Problem simplifies your coding process by creating a downloadable file for the problem you've selected.",
     "version": "0.0.1",
     "manifest_version": 3,
     "action": {

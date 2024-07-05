@@ -10,6 +10,7 @@ form.addEventListener("submit", function (event) {
 
     const cFileContent = `#include <bits/stdc++.h>
     #define int long long
+    int tc = 1;
     using namespace std;
 
     void solve() {
@@ -35,10 +36,7 @@ form.addEventListener("submit", function (event) {
     var title = document.getElementsByClassName("title")[0];
 
     if (title) {
-
-        // var trimmedString = title.textContent.trim();
-        // var transformedString = trimmedString.replace(/[ .]+/g, '-');
-
+        
         var filteredString = title.textContent.replace(/[^a-zA-Z0-9]+/g, '-');
   
         // Remove leading and trailing hyphens
@@ -86,7 +84,7 @@ form.addEventListener("submit", function (event) {
 var input = document.createElement("input");
 input.type = "submit";
 input.name = "submit";
-input.value = "Generate file";
+input.value = "Pick this Problem";
 input.style.padding = "0 0.5em";
 
 form.appendChild(input);
