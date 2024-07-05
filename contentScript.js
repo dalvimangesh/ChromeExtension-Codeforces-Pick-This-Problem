@@ -84,7 +84,7 @@ form.addEventListener("submit", function (event) {
 var input = document.createElement("input");
 input.type = "submit";
 input.name = "submit";
-input.value = "Pick this Problem";
+input.value = "Pick This Problem";
 input.style.padding = "0 0.5em";
 
 form.appendChild(input);
