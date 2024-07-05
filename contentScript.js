@@ -1,5 +1,3 @@
-// console.log('Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here Mangesh here')
-
 // Create the div element for styling
 var div = document.createElement("div");
 div.style.textAlign = "center";
@@ -9,17 +7,30 @@ div.style.margin = "1em";
 var form = document.createElement("form");
 
 // Add submit event listener to the form
+
 form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting
     // alert("Hey"); // Show the popup
 
 
-    const cFileContent = `#include <stdio.h>
+    const cFileContent = `#include <bits/stdc++.h>
+    #define int long long
+    using namespace std;
 
-    int main() {
-        printf("Hello, World!\\n");
+    void solve() {
+
+    }
+
+    signed main() {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL); cout.tie(NULL);
+        cin >> tc;
+        while (tc--) {
+            solve();
+        }
         return 0;
-    }`;
+    }
+    `;
 
     const blob = new Blob([cFileContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -30,16 +41,16 @@ form.addEventListener("submit", function (event) {
 
     var title = document.getElementsByClassName("title")[0];
 
-    if(title) {
+    if (title) {
 
         var trimmedString = title.textContent.trim();
 
         // Replace spaces and periods with hyphens, and replace multiple consecutive hyphens with a single hyphen
         var transformedString = trimmedString.replace(/[ .]+/g, '-');
-        
+
         // Log the result
         // console.log(transformedString);
-        
+
 
         a.download = transformedString;
 
@@ -49,12 +60,34 @@ form.addEventListener("submit", function (event) {
         a.download = 'name.cpp';
     }
 
-    document.body.appendChild(a);
-    a.click();
+    chrome.runtime.sendMessage({ action: "getTabUrl" }, (response) => {
 
-    // Clean up the temporary anchor element
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+        if (response && response.url) {
+
+            regex = /(?:contest|problemset\/problem)\/(\d+)/;
+
+            var match = response.url.match(regex);
+
+            if (match) {
+
+                var contestId = match[1];
+                console.log(contestId);
+                a.download = contestId + '-' + a.download;
+
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+            }
+
+        }
+
+        else {
+            console.log('url not found')
+        }
+
+    });
 
 });
 
