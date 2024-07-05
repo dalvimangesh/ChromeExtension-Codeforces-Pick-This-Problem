@@ -3,15 +3,10 @@ var div = document.createElement("div");
 div.style.textAlign = "center";
 div.style.margin = "1em";
 
-// Create the form element
 var form = document.createElement("form");
-
-// Add submit event listener to the form
 
 form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting
-    // alert("Hey"); // Show the popup
-
 
     const cFileContent = `#include <bits/stdc++.h>
     #define int long long
@@ -34,8 +29,6 @@ form.addEventListener("submit", function (event) {
 
     const blob = new Blob([cFileContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-
-    // Create a temporary anchor element to trigger the download
     const a = document.createElement('a');
     a.href = url;
 
@@ -43,17 +36,15 @@ form.addEventListener("submit", function (event) {
 
     if (title) {
 
-        var trimmedString = title.textContent.trim();
+        // var trimmedString = title.textContent.trim();
+        // var transformedString = trimmedString.replace(/[ .]+/g, '-');
 
-        // Replace spaces and periods with hyphens, and replace multiple consecutive hyphens with a single hyphen
-        var transformedString = trimmedString.replace(/[ .]+/g, '-');
-
-        // Log the result
-        // console.log(transformedString);
-
+        var filteredString = title.textContent.replace(/[^a-zA-Z0-9]+/g, '-');
+  
+        // Remove leading and trailing hyphens
+        transformedString = filteredString.replace(/^-+|-+$/g, '');
 
         a.download = transformedString;
-
         a.download += '.cpp';
     }
     else {
@@ -98,14 +89,7 @@ input.name = "submit";
 input.value = "Generate file";
 input.style.padding = "0 0.5em";
 
-// Append the input to the form
 form.appendChild(input);
-
-// Append the form to the div
 div.appendChild(form);
-
-// Find the sidebar element
 var sidebar = document.getElementById("sidebar");
-
-// Append the div at the start of the sidebar
 sidebar.insertBefore(div, sidebar.firstChild);
