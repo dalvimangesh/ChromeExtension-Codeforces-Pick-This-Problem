@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Template Downloader</title>
+    <link rel="stylesheet" href="popUpstyles.css">
 </head>
 <body>
-    <p>Still in test enviroment</p>
+    <div class="popup-container" id="popup-container">
+        <h2>Codeforces Pick This Problem</h2>
+        <div class="input-group">
+            <label for="template">Your Code Template</label>
+            <textarea id="template" rows="6" required></textarea>
+        </div>
+        <div class="input-group">
+            <label for="language">Language Extension (example write .cpp for c++)</label>
+            <input type="text" id="language" required>
+        </div>
+        <button id="downloadBtn">Update Template</button>
+    </div>
+    
+    <script src="popUpScript.js"></script>
+
 </body>
 </html>

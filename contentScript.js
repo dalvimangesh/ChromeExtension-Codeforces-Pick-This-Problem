@@ -5,28 +5,41 @@ div.style.margin = "1em";
 
 var form = document.createElement("form");
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
+
     event.preventDefault(); // Prevent the form from submitting
 
-    const cFileContent = `#include <bits/stdc++.h>
-    #define int long long
-    int tc = 1;
-    using namespace std;
+    template = "";
+    language = ".cpp";
 
-    void solve() {
+    const getTemplate = new Promise((resolve, reject) => {
+        chrome.storage.local.get(["template"], (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } else {
+                resolve(result.template);
+            }
+        });
+    });
 
-    }
+    const getLanguage = new Promise((resolve, reject) => {
+        chrome.storage.local.get(["language"], (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } else {
+                resolve(result.language);
+            }
+        });
+    });
 
-    signed main() {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL); cout.tie(NULL);
-        cin >> tc;
-        while (tc--) {
-            solve();
-        }
-        return 0;
-    }
-    `;
+    template = await getTemplate;
+    language = await getLanguage;
+
+
+    console.log(template)
+    console.log(language)
+
+    const cFileContent = template;
 
     const blob = new Blob([cFileContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -43,10 +56,10 @@ form.addEventListener("submit", function (event) {
         transformedString = filteredString.replace(/^-+|-+$/g, '');
 
         a.download = transformedString;
-        a.download += '.cpp';
+        a.download += language;
     }
     else {
-        a.download = 'name.cpp';
+        a.download = 'name' + language;
     }
 
     chrome.runtime.sendMessage({ action: "getTabUrl" }, (response) => {
