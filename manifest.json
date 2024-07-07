@@ -4,10 +4,10 @@
     "version": "0.0.1",
     "manifest_version": 3,
     "action": {
-        "default_popup": "./popUp.html"
+        "default_popup": "./popUp/popUp.html"
     },
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "./background/background.js"
     },
     "content_scripts": [
         {
@@ -16,7 +16,7 @@
                 "*://codeforces.com/contest/*/problem/*"
             ],
             "js": [
-                "contentScript.js"
+                "./contentScript/contentScript.js"
             ]
         }
     ],
